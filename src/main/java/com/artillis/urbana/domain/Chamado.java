@@ -1,6 +1,7 @@
 package com.artillis.urbana.domain;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 import com.artillis.urbana.domain.enums.Status;
 
@@ -28,6 +29,87 @@ public class Chamado {
 		this.observacoes = observacoes;
 		this.cartao = cartao;
 		this.cliente = cliente;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public LocalDate getDataAbertura() {
+		return dataAbertura;
+	}
+
+	public void setDataAbertura(LocalDate dataAbertura) {
+		this.dataAbertura = dataAbertura;
+	}
+
+	public LocalDate getDataFechamento() {
+		return dataFechamento;
+	}
+
+	public void setDataFechamento(LocalDate dataFechamento) {
+		this.dataFechamento = dataFechamento;
+	}
+
+	public Status getStatus() {
+		return status;
+	}
+
+	public void setStatus(Status status) {
+		this.status = status;
+	}
+
+	public String getTitulo() {
+		return titulo;
+	}
+
+	public void setTitulo(String titulo) {
+		this.titulo = titulo;
+	}
+
+	public String getObservacoes() {
+		return observacoes;
+	}
+
+	public void setObservacoes(String observacoes) {
+		this.observacoes = observacoes;
+	}
+
+	public Cartao getCartao() {
+		return cartao;
+	}
+
+	public void setCartao(Cartao cartao) {
+		this.cartao = cartao;
+	}
+
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(id);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Chamado other = (Chamado) obj;
+		return Objects.equals(id, other.id);
 	}
 	
 	
