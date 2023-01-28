@@ -3,8 +3,14 @@ package com.artillis.urbana.domain;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Cartao extends Pessoa{
+import jakarta.persistence.Entity;
+import jakarta.persistence.OneToMany;
 
+@Entity
+public class Cartao extends Pessoa{
+	private static final long serialVersionUID = 1L;
+
+	@OneToMany(mappedBy = "cliente")
 	private List<Chamado> chamados = new ArrayList<>();
 
 	public Cartao() {
