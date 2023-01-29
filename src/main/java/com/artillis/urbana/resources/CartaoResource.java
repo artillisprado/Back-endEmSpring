@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.artillis.urbana.domain.Cartao;
+import com.artillis.urbana.domain.dtos.CartaoDTO;
 import com.artillis.urbana.services.CartaoService;
 
 @RestController
@@ -20,8 +21,8 @@ public class CartaoResource {
 	private CartaoService service;
 	
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<Cartao> findById(@PathVariable Integer id) {
+	public ResponseEntity<CartaoDTO> findById(@PathVariable Integer id) {
 		Cartao obj = service.findById(id);
-		return ResponseEntity.ok().body(obj);
+		return ResponseEntity.ok().body(new CartaoDTO(obj));
 	}
 }
