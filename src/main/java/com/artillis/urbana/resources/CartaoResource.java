@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -54,5 +55,11 @@ public class CartaoResource {
 	public ResponseEntity<CartaoDTO> update(@PathVariable Integer id,@Valid @RequestBody CartaoDTO objDTO) {
 		Cartao obj = service.update(id, objDTO);
 		return ResponseEntity.ok().body(new CartaoDTO(obj));
+	}
+	
+	@DeleteMapping(value = "/{id}")
+	public ResponseEntity<CartaoDTO> delete(@PathVariable Integer id) {
+		service.delete(id);
+		return ResponseEntity.noContent().build();
 	}
 }

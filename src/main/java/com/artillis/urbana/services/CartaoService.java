@@ -47,6 +47,14 @@ public class CartaoService {
 		oldObj = new Cartao(objDTO);
 		return repository.save(oldObj);
 	}
+	
+	public void delete(Integer id) {
+		Cartao obj = findById(id);
+		if(obj.getChamados().size() > 0) {
+			throw new DataIntegrityViolationException("O usuario possui mais de um cartão, e não pode ser deletado.");
+		} 
+		repository.deleteById(id);
+	}
 
 	private void validaporCPFEEMAIL(CartaoDTO objDTO) {
 		Optional<Pessoa> obj = pessoaRepository.findByCpf(objDTO.getCpf());
@@ -60,6 +68,4 @@ public class CartaoService {
 		}
 		
 	}
-
-
 }
