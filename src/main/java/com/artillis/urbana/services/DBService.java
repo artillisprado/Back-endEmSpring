@@ -31,7 +31,7 @@ public class DBService {
 		Cartao cart4 = new Cartao(null, "Tim Berners-Lee", "162.720.120-39", "lee@mail.com", "123");
 		Cartao cart5 = new Cartao(null, "Linus Torvalds", "778.556.170-27", "linus@mail.com", "123");
 		
-		Cliente cli1 = new Cliente(null, "Linus Trovados", "705.962.580-11", "linus@mail.com", "123");
+		Cliente cli1 = new Cliente(null, "Linus Trovados", "705.962.580-11", "l@mail.com", "123");
 		Cliente cli2 = new Cliente(null, "Marie Curie", "322.429.140-06", "curie@mail.com", "123");
 		Cliente cli3 = new Cliente(null, "Charles Darwin", "792.043.830-62", "darwin@mail.com", "123");
 		Cliente cli4 = new Cliente(null, "Stephen Hawking", "177.409.680-30", "hawking@mail.com", "123");
