@@ -14,6 +14,8 @@ import com.artillis.urbana.repositories.PessoaRepository;
 import com.artillis.urbana.services.exceptions.DataIntegrityViolationException;
 import com.artillis.urbana.services.exceptions.ObjectnotFoundException;
 
+import jakarta.validation.Valid;
+
 @Service
 public class CartaoService {
 	
@@ -37,6 +39,14 @@ public class CartaoService {
 		Cartao newObj = new Cartao(objDTO);
 		return repository.save(newObj);
 	}
+	
+	public Cartao update(Integer id, @Valid CartaoDTO objDTO) {
+		objDTO.setId(id);
+		Cartao oldObj = findById(id);
+		validaporCPFEEMAIL(objDTO);
+		oldObj = new Cartao(objDTO);
+		return repository.save(oldObj);
+	}
 
 	private void validaporCPFEEMAIL(CartaoDTO objDTO) {
 		Optional<Pessoa> obj = pessoaRepository.findByCpf(objDTO.getCpf());
@@ -50,4 +60,6 @@ public class CartaoService {
 		}
 		
 	}
+
+
 }
