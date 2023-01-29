@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.artillis.urbana.domain.Cartao;
 import com.artillis.urbana.repositories.CartaoRepository;
+import com.artillis.urbana.services.exceptions.ObjectnotFoundException;
 
 @Service
 public class CartaoService {
@@ -16,6 +17,6 @@ public class CartaoService {
 	
 	public Cartao findById(Integer id) {
 		Optional<Cartao> obj = repository.findById(id);
-		return obj.orElse(null);
+		return obj.orElseThrow(() -> new ObjectnotFoundException("Objeto não encontrado ! id: " + id));
 	}
 }
