@@ -1,5 +1,6 @@
 package com.artillis.urbana.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,5 +19,9 @@ public class CartaoService {
 	public Cartao findById(Integer id) {
 		Optional<Cartao> obj = repository.findById(id);
 		return obj.orElseThrow(() -> new ObjectnotFoundException("Objeto não encontrado ! id: " + id));
+	}
+
+	public List<Cartao> findAll() {
+		return repository.findAll();
 	}
 }

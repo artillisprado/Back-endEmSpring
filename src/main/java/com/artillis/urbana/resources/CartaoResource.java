@@ -1,5 +1,8 @@
 package com.artillis.urbana.resources;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,5 +27,12 @@ public class CartaoResource {
 	public ResponseEntity<CartaoDTO> findById(@PathVariable Integer id) {
 		Cartao obj = service.findById(id);
 		return ResponseEntity.ok().body(new CartaoDTO(obj));
+	}
+	
+	@GetMapping
+	public ResponseEntity<List<CartaoDTO>> findAll() {
+		List<Cartao> list = service.findAll();
+		List<CartaoDTO> listDto = list.stream().map(obj -> new CartaoDTO(obj)).collect(Collectors.toList());
+		return ResponseEntity.ok().body(listDto);
 	}
 }
