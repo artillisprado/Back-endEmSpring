@@ -6,6 +6,8 @@ import java.time.LocalDate;
 import com.artillis.urbana.domain.Chamado;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import jakarta.validation.constraints.NotNull;
+
 public class ChamadoDTO implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
@@ -14,10 +16,15 @@ public class ChamadoDTO implements Serializable{
 	private LocalDate dataAbertura = LocalDate.now();
 	@JsonFormat(pattern = "dd/MM/yyyy")
 	private LocalDate dataFechamento;
+	@NotNull(message = "O Campo Status é requerido")
 	private Integer status;
+	@NotNull(message = "O Campo Titulo é requerido")
 	private String titulo;
+	@NotNull(message = "O Campo Observacoes é requerido")
 	private String observacoes;
+	@NotNull(message = "O Campo Cartao é requerido")
 	private Integer cartao;
+	@NotNull(message = "O Campo Cliente é requerido")
 	private Integer cliente;
 	private String nomeCartao;
 	private String nomeCliente;
