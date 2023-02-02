@@ -8,6 +8,7 @@ import com.artillis.urbana.domain.dtos.CartaoDTO;
 import com.artillis.urbana.domain.enums.Perfil;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 
@@ -16,26 +17,34 @@ public class Cartao extends Pessoa{
 	private static final long serialVersionUID = 1L;
 
 	@JsonIgnore
-	@OneToMany(mappedBy = "cliente")
+	@OneToMany(mappedBy = "cartao")
 	private List<Chamado> chamados = new ArrayList<>();
+	
+	@Column(unique = true)
+	private String cartao;
 
 	public Cartao() {
 		super();
-		addPerfil(Perfil.COMUM);
 	}
+	
+	public Cartao(Integer id, String nome, String cartao, Integer perfil) {
+		this.nome = nome;
+		this.cartao = cartao;
 
-	public Cartao(Integer id, String nome, String cpf, String email, String senha) {
-		super(id, nome, cpf, email, senha);
-		addPerfil(Perfil.COMUM);
+		if(perfil == 0) {
+			addPerfil(Perfil.COMUM);
+		} else if (perfil == 1){
+			addPerfil(Perfil.ESTUDANTE);
+		} else if (perfil == 2) {
+			addPerfil(Perfil.TRABALHADOR);
+		}
 	}
 	
 	public Cartao(CartaoDTO obj) {
 		super();
 		this.id = obj.getId();
 		this.nome = obj.getNome();
-		this.cpf = obj.getCpf();
-		this.email = obj.getEmail();
-		this.senha = obj.getSenha();
+		this.cartao = obj.getCartao();
 		this.perfis = obj.getPerfis().stream().map(x -> x.getCodigo()).collect(Collectors.toSet());
 		this.dataCriacao = obj.getDataCriacao();
 	}
@@ -46,5 +55,13 @@ public class Cartao extends Pessoa{
 
 	public void setChamados(List<Chamado> chamados) {
 		this.chamados = chamados;
+	}
+	
+	public String getCartao() {
+		return cartao;
+	}
+
+	public void setCartao(String cartao) {
+		this.cartao = cartao;
 	}
 }

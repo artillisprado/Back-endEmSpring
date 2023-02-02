@@ -10,14 +10,17 @@ import com.artillis.urbana.domain.Cartao;
 import com.artillis.urbana.domain.enums.Perfil;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import jakarta.validation.constraints.NotNull;
+
 public class CartaoDTO implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	protected Integer id;
+	@NotNull(message = "O campo NOME é requerido")
 	protected String nome;
-	protected String cpf;
-	protected String email;
-	protected String senha;	
+	@NotNull(message = "O campo CARTAO é requerido")
+	protected String cartao;
+	@NotNull(message = "O campo Perfil é requerido")
 	protected Set<Integer> perfis = new HashSet<>();
 	
 	@JsonFormat(pattern = "dd/MM/yyyy")
@@ -31,12 +34,9 @@ public class CartaoDTO implements Serializable{
 		super();
 		this.id = obj.getId();
 		this.nome = obj.getNome();
-		this.cpf = obj.getCpf();
-		this.email = obj.getEmail();
-		this.senha = obj.getSenha();
+		this.cartao = obj.getCartao();
 		this.perfis = obj.getPerfis().stream().map(x -> x.getCodigo()).collect(Collectors.toSet());
 		this.dataCriacao = obj.getDataCriacao();
-		addPerfis(Perfil.COMUM);
 	}
 
 	public Integer getId() {
@@ -55,28 +55,12 @@ public class CartaoDTO implements Serializable{
 		this.nome = nome;
 	}
 
-	public String getCpf() {
-		return cpf;
+	public String getCartao() {
+		return cartao;
 	}
 
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public String getSenha() {
-		return senha;
-	}
-
-	public void setSenha(String senha) {
-		this.senha = senha;
+	public void setCartao(String cartao) {
+		this.cartao = cartao;
 	}
 
 	public Set<Perfil> getPerfis() {
